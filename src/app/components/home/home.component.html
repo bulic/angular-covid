@@ -1,88 +1,51 @@
-<div class="bg-danger row col-md-12 col-12 col-sm-12 mx-auto">
-    <div class="col-md-5 mx-auto  col-8 col-sm-8" style="margin-top:3em">
-        <img src="../../../assets/COVID-19-Blog-Header-Banner.png" alt="resp" width="100%">
-    </div>
-</div>
-<div style="height: 10em;">
-    <div class=" bg-danger text-white  h-100 row justify-content-center col-md-12 col-12 mx-auto mb-3 ">
-        <h2 class=" text-center text-uppercase font-weight-bold  " style="margin-top: 0.5em;">Last date of global
-            data <span>{{Date |date:'fullDate'}}</span> </h2>
-
-    </div>
-</div>
-
-<div class="container col-md-12 col-12" style="margin-top: -5em;">
-    <div class="row">
-        <div class="col-md-3 col-12 mt-4">
-            <div class="card text-center ">
-                <div class="card-header  text-uppercase ">
-                    <h5 class=" card-title  font-weight-bold  ">New Confirmed</h5>
-                </div>
-                <h4 class="card-body card-text">{{NewConfirmed}}</h4>
-            </div>
+<div class="col-md-12 col-12 col-sm-12">
+    <div class="bg-danger">
+        <div class="col-md-5 mx-auto col-8 pt-4">
+            <img src="../../../assets/COVID-19-Blog-Header-Banner.png" alt="resp" width="100%">
         </div>
-        <div class="col-md-3 col-12 mt-4">
-            <div class="card text-center ">
-                <div class="card-header  text-uppercase ">
-                    <h5 class=" card-title  font-weight-bold ">Total Confirmed</h5>
-                </div>
-                <h4 class="card-body card-text">{{TotalConfirmed}}</h4>
-            </div>
-        </div>
-        <div class="col-md-3 col-12 mt-4">
-            <div class="card text-center ">
-                <div class="card-header  text-uppercase ">
-                    <h5 class=" card-title  font-weight-bold ">Total Deaths</h5>
-                </div>
-                <h4 class="card-body card-text">{{TotalDeaths}}</h4>
-            </div>
-        </div>
-        <div class="col-md-3 col-12 mt-4">
-            <div class="card text-center ">
-                <div class="card-header  text-uppercase ">
-                    <h5 class=" card-title  font-weight-bold ">Total Recovered</h5>
-                </div>
-                <h4 class="card-body card-text">{{TotalRecovered}}</h4>
+        <div>
+            <div class="text-white pb-5 pt-4 text-center">
+                <h2 class="text-center text-uppercase font-weight-bold">Last date of global
+                    data <span>{{Date |date:'fullDate'}}</span></h2>
             </div>
         </div>
     </div>
-
-</div>
-<hr>
-<div class="col text-center">
-    <button type="button" class="btn btn-secondary col-md-6 shadow-none" (click)=toggleDisplayDivIf()>Table with all
-        data by Country</button>
-
-    <div *ngIf="!isShowDivIf">
-        <table class="table table-striped th-sm col-md-12 col-12" style="margin-top:1em ;">
-            <thead>
-                <tr class="d-flex">
-                    <th class="text-left col-4" scope="col">County</th>
-                    <th class=" col-3" scope="col">Confirmed</th>
-                    <th class=" col-2" scope="col">Deaths</th>
-                    <th class=" col-3" scope="col">Recovered</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="d-flex" *ngFor="let con of data">
-                    <td class="text-left col-4">{{con.Country}}</td>
-                    <td class=" col-3">{{con.TotalConfirmed}}</td>
-                    <td class=" col-2">{{con.TotalDeaths}}</td>
-                    <td class=" col-3">{{con.TotalRecovered}}</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="container col-md-12 col-12">
+        <app-card [dataGlobal]="dataGlobal"></app-card>
     </div>
-</div>
-
-<hr>
-<h5 class="text-center font-weight-bold">Total Confirmed Statistic</h5>
-<div class="row col-lg-12 col-12 ">
-
-    <div class=" col-lg-6 col-md-12 col-12  ">
-        <google-chart [data]="pieChart"></google-chart>
+    <hr>
+    <div class="col text-center">
+        <button type="button" class="btn btn-secondary col-md-6 shadow-none" (click)=toggleTable()>Table with all
+            data by Country</button>
+        <div *ngIf="!isTableShow">
+            <table class="table table-striped th-sm col-12 mt-3">
+                <thead>
+                    <tr class="d-flex">
+                        <th class="text-left col-4" scope="col">County</th>
+                        <th class="col-3" scope="col">Confirmed</th>
+                        <th class="col-2" scope="col">Deaths</th>
+                        <th class="col-3" scope="col">Recovered</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="d-flex" *ngFor="let item of dataCountries">
+                        <td class="text-left col-4">{{item.Country}}</td>
+                        <td class="col-3">{{item.TotalConfirmed}}</td>
+                        <td class="col-2">{{item.TotalDeaths}}</td>
+                        <td class="col-3">{{item.TotalRecovered}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class=" col-lg-6 col-md-12 col-12">
-        <google-chart [data]="lineChart"></google-chart>
+    <hr>
+    <h5 class="text-center font-weight-bold">Total Confirmed Statistic</h5>
+    <div class="row col-lg-12 col-12 bg-danger pt-4 pb-4 rounded-lg mx-auto">
+        <div class="col-lg-6 col-md-12 col-12">
+            <google-chart [data]="columnChart"></google-chart>
+        </div>
+        <div class="col-lg-6 col-md-12 col-12">
+            <google-chart [data]="pieChart"></google-chart>
+        </div>
     </div>
 </div>
