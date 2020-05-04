@@ -6,7 +6,7 @@ import { ICountries } from './countries';
 
 @Injectable()
 export class GlobalDataService {
-  private globalDataUrl = `https://api.covid19api.com/summary`;
+  private globalDataUrl = 'https://api.covid19api.com/summary';
 
   constructor(private http: HttpClient) {}
 
@@ -14,9 +14,9 @@ export class GlobalDataService {
     return this.http
       .get<{ Countries: ICountries[]; Global: IGlobal }>(this.globalDataUrl)
       .pipe(
-        map((data) => ({
-          countries: data.Countries,
-          global: data.Global,
+        map(({ Countries, Global }) => ({
+          countries: Countries,
+          global: Global,
         }))
       );
   }

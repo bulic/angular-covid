@@ -6,16 +6,16 @@
         <div>
             <div class="text-white pb-5 pt-4 text-center">
                 <h2 class="text-center text-uppercase font-weight-bold">Last date of global
-                    data <span>{{Date |date:'fullDate'}}</span></h2>
+                    data <span>{{Date | date:'fullDate'}}</span></h2>
             </div>
         </div>
     </div>
-    <div class="container col-md-12 col-12">
+    <div class="col-12">
         <app-card [dataGlobal]="dataGlobal"></app-card>
     </div>
-    <hr>
     <div class="col text-center">
-        <button type="button" class="btn btn-secondary col-md-6 shadow-none" (click)=toggleTable()>Table with all
+        <button type="button" class="btn btn-secondary col-md-6 shadow-none mt-2 mb-5" (click)=toggleTable()>Table with
+            all
             data by Country</button>
         <div *ngIf="!isTableShow">
             <table class="table table-striped th-sm col-12 mt-3">
@@ -38,7 +38,6 @@
             </table>
         </div>
     </div>
-    <hr>
     <h5 class="text-center font-weight-bold">Total Confirmed Statistic</h5>
     <div class="row col-lg-12 col-12 bg-danger pt-4 pb-4 rounded-lg mx-auto">
         <div class="col-lg-6 col-md-12 col-12">
