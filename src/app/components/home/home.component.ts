@@ -31,6 +31,10 @@ export class HomeComponent implements OnInit {
     this.fetchData();
   }
 
+  ngOnDestroy() {
+    this.dataServiceSub$.unsubscribe();
+  }
+
   fetchData() {
     this.dataServiceSub$ = this.dataService
       .fetchGlobalData()
@@ -43,10 +47,6 @@ export class HomeComponent implements OnInit {
         });
         this.initChart();
       });
-  }
-
-  ngOnDestroy() {
-    this.dataServiceSub$.unsubscribe();
   }
 
   toggleTable() {
