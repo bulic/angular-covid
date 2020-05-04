@@ -1,7 +1,0 @@
-{
-  "prettier.jsxBracketSameLine": true,
-  "prettier.useEditorConfig": false,
-  "[json]": {},
-  "html.format.endWithNewline": true,
-  "html.format.extraLiners": ""
-}
