@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GlobalDataService } from 'src/app/globalData.service';
 import { IGlobal } from 'src/app/global';
 import { ICountries } from 'src/app/countries';
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   Date = '';
   Country = '';
   dataCountries: ICountries[];
