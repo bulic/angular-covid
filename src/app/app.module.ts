@@ -8,7 +8,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { GlobalDataService } from './globalData.service';
 import { VideoComponent } from './components/video/video.component';
 import { CardComponent } from './components/card/card.component';
-import { YouTubePlayerModule } from '@angular/youtube-player';
 
 @NgModule({
   declarations: [
@@ -23,7 +22,6 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
     AppRoutingModule,
     HttpClientModule,
     Ng2GoogleChartsModule,
-    YouTubePlayerModule,
   ],
   providers: [GlobalDataService],
   bootstrap: [AppComponent],
