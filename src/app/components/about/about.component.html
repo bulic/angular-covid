@@ -1,62 +1,33 @@
-<div class="col-12">
-    <div class="jumbotron text-center bg-danger text-white">
-        <h1 class="display-4 font-weight-bold">Covid-19</h1>
-        <p class="lead">Coronavirus disease (COVID-19) is an infectious disease caused by a newly discovered
-            coronavirus.</p>
-        <hr class="my-4">
-        <p>Most people infected with the COVID-19 virus will experience mild to moderate respiratory illness and recover
-            without requiring special treatment. Older people, and those with underlying medical problems like
-            cardiovascular disease, diabetes, chronic respiratory disease, and cancer are more likely to develop serious
-            illness.</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="jumbotron text-center bg-danger text-white">
+                <h1 class="display-4 font-weight-bold">Covid-19</h1>
+                <p class="lead">Coronavirus disease (COVID-19) is an infectious disease caused by a newly discovered
+                    coronavirus.</p>
+                <hr class="my-4">
+                <p>Most people infected with the COVID-19 virus will experience mild to moderate respiratory illness and
+                    recover
+                    without requiring special treatment. Older people, and those with underlying medical problems like
+                    cardiovascular disease, diabetes, chronic respiratory disease, and cancer are more likely to develop
+                    serious
+                    illness.</p>
+            </div>
+        </div>
     </div>
-    <div class="row ">
-        <div class="col-md-12 col-lg-6">
-            <div class="col-md-12 bg-light rounded ">
+    <div class="row mb-4">
+        <div class="col-md-12 col-lg-6 mt-3">
+            <div class="row">
                 <h4 class="col-12 text-center mb-4 pt-5 text-uppercase">Symptoms</h4>
+            </div>
+            <div class="row">
                 <div class="col-12">
                     <div class="row">
-                        <div class="col-12 col-md-4 text-center mb-5 mt-2">
-                            <div class="bg-light rounded border border-secondary p-2">
-                                <img src="../../../assets/5728192 - head headache migraine pain severe shock.png"
-                                    alt="headache">
-                                <h6 class="card-text">Headache</h6>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4 text-center mb-5 mt-2">
-                            <div class="bg-light rounded border border-secondary p-2">
-                                <img src="../../../assets/5728198 - bronchitis inflamation influenza lung pneumonia.png"
-                                    alt="influenza">
-                                <h6 class="card-text">Difficulty breathing</h6>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4 text-center mb-5 mt-2">
-                            <div class="bg-light rounded border border-secondary p-2">
-                                <img src="../../../assets/5728182 - chill cold covid-19 fever flu shivering sick.png"
-                                    alt="flu">
-                                <h6 class="card-text">Chills</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-md-4 text-center mb-5 mt-2">
-                            <div class="bg-light rounded border border-secondary p-2">
-                                <img src="../../../assets/5728201 - cough covid-19 flu sick sneezing sniffling wheezing.png"
-                                    alt="flu">
-                                <h6 class="card-text">Coughing & sneezing</h6>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4 text-center mb-5 mt-2">
-                            <div class="bg-light rounded border border-secondary p-2">
-                                <img src="../../../assets/5728186 - bowel constipation diarrhea irritable sick.png"
-                                    alt="diarrhea">
-                                <h6 class="card-text">Diarrhea</h6>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4 text-center mb-5 mt-2">
-                            <div class="bg-light rounded border border-secondary p-2">
-                                <img src="../../../assets/5728190 - covid-19 fever high sick sweat temperature.png"
-                                    alt="fever">
-                                <h6 class="card-text">High body temperature</h6>
+                        <div class="col-12 col-md-6 col-lg-4 pb-2 pt-2 text-center mb-5 mt-2"
+                             *ngFor="let item of symptoms">
+                             <div class="bg-light rounded border border-secondary p-2">
+                                <img src={{item.image}}>
+                                <h6 class="card-text">{{item.name}}</h6>
                             </div>
                         </div>
                     </div>
@@ -70,44 +41,25 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12 col-lg-6">
-            <div class="bg-light rounded ">
-                <h4 class="col-12 text-center mb-4 pt-5 text-uppercase">Video about Covid-19</h4>
-                <div class="col-12 pt-2">
-                    <div class="text-center mb-3 pb-5">
+        <div class="col-md-12 col-lg-6 mt-3">
+            <div class="bg-warning rounded">
+                <h4 class="text-center mb-4 pt-5 text-uppercase">Video about Covid-19</h4>
+                <div class="pt-2">
+                    <div class="text-center mb-3">
                         <app-video></app-video>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-12 bg-light pt-5 mt-4">
-        <h4 class="col-12 text-center mb-5  text-uppercase">Prevention</h4>
+    <div class="row">
+        <h4 class="col-12 text-center mb-4  text-uppercase">Prevention</h4>
         <div class="col-12">
             <div class="row">
-                <div class="col-md-3 text-center mb-5">
-                    <div class="bg-light rounded border border-secondary p-2">
-                        <img src="../../../assets/5728191 - clean hands hygiene soap washing.png" alt="soap">
-                        <h6 class="card-text">Wash your hands with soap and water.</h6>
-                    </div>
-                </div>
-                <div class="col-md-3 text-center mb-5">
-                    <div class="bg-light rounded border border-secondary p-2">
-                        <img src="../../../assets/5728185 - avoid contact covid-19 crowd no people.png" alt="contact">
-                        <h6 class="card-text">Avoid crowd and close contacts</h6>
-                    </div>
-                </div>
-                <div class="col-md-3 text-center mb-5">
-                    <div class="bg-light rounded border border-secondary p-2">
-                        <img src="../../../assets/5728193 - covid-19 doctor flu mask protection wearing.png" alt="mask">
-                        <h6 class="card-text">You should wear flu mask if going outside</h6>
-                    </div>
-                </div>
-                <div class="col-md-3 text-center mb-5">
-                    <div class="bg-light rounded border border-secondary p-2">
-                        <img src="../../../assets/5728194 - covid-19 home hygiene prevent protection stay.png"
-                            alt="hygiene">
-                        <h6 class="card-text">Stay home if you feel unwell.</h6>
+                <div class="col-12 col-md-6 col-lg-3 text-center mb-5 mt-2" *ngFor="let item of preventions">
+                     <div class="bg-light rounded border border-secondary p-2">
+                        <img src={{item.image}}>
+                          <h6 class="card-text">{{item.name}}</h6>
                     </div>
                 </div>
             </div>
