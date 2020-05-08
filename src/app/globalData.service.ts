@@ -20,4 +20,35 @@ export class GlobalDataService {
         }))
       );
   }
+
+  fetchDataCountry(name: string) {
+    return this.http
+      .get<any>(`https://api.covid19api.com/dayone/country/${name}`)
+      .pipe(
+        map((data) =>
+          data.reduce(
+            (acc, item) => [
+              ...acc,
+              { ...item, Date: new Date(item.Date).toLocaleDateString() },
+            ],
+            []
+          )
+        )
+      );
+  }
+
+  fetchWeatherData(lat: number, lon: number) {
+    return this.http
+      .get<any>(
+        `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=9c7178a58edc89a14593118e51a4e609`
+      )
+      .pipe(
+        map((data) => {
+          return {
+            name: data.name,
+            temp: data.main.temp,
+          };
+        })
+      );
+  }
 }

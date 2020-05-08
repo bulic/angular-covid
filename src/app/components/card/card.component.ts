@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { IGlobal } from '../../global';
 
 @Component({
   selector: 'app-card',
@@ -7,7 +6,11 @@ import { IGlobal } from '../../global';
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent {
-  @Input() dataGlobal: IGlobal;
-
+  @Input('TotalConfirmed')
+  totalConfirmed;
+  @Input('TotalDeaths')
+  totalDeaths;
+  @Input('TotalRecovered')
+  totalRecovered;
   constructor() {}
 }

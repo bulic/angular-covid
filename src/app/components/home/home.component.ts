@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GlobalDataService } from 'src/app/globalData.service';
 import { IGlobal } from 'src/app/global';
 import { ICountries } from 'src/app/countries';
-import { GoogleChartInterface } from 'ng2-google-charts';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -11,18 +10,24 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
+  loading: boolean = false;
+  totalData = {
+    totalConfirmed: 0,
+    totalDeaths: 0,
+    totalRecovered: 0,
+  };
   Date = '';
   Country = '';
+  datatable = [];
   dataCountries: ICountries[];
   dataGlobal: IGlobal;
   dataServiceSub$: Subscription;
   isTableShow = true;
-
-  pieChart: GoogleChartInterface = {
-    chartType: 'PieChart',
-  };
-  columnChart: GoogleChartInterface = {
-    chartType: 'ColumnChart',
+  chart = {
+    PieChart: 'PieChart',
+    ColumnChart: 'ColumnChart',
+    height: 400,
+    dynamicResize: true,
   };
 
   constructor(private dataService: GlobalDataService) {}
@@ -36,12 +41,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   fetchData() {
+    this.loading = true;
     this.dataServiceSub$ = this.dataService
       .fetchGlobalData()
       .subscribe(({ countries, global }) => {
         this.dataCountries = countries;
         this.dataGlobal = global;
-
+        this.totalData.totalConfirmed = global.TotalConfirmed;
+        this.totalData.totalDeaths = global.TotalDeaths;
+        this.totalData.totalRecovered = global.TotalRecovered;
+        this.loading = false;
         countries.map((el) => {
           this.Date = el.Date;
         });
@@ -54,25 +63,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   initChart() {
+    this.datatable = [];
     let arr = this.dataCountries.filter((a) => {
-      if (a.TotalConfirmed > 10000) {
+      if (a.TotalConfirmed > 20000) {
         return a.TotalConfirmed;
       }
     });
-
-    this.pieChart = {
-      chartType: 'PieChart',
-      dataTable: [['Country', 'Cases'], ...this.getDataTable()],
-      options: { height: 450, pieHole: 0.4 },
-    };
-    this.columnChart = {
-      chartType: 'ColumnChart',
-      dataTable: [
-        ['Country', 'Cases'],
-        ...arr.map((el) => [el.Country, el.TotalConfirmed]),
-      ],
-      options: { height: 450 },
-    };
+    arr.forEach((cs) => {
+      let value: number;
+      value = cs.TotalConfirmed;
+      this.datatable.push([cs.Country, value]);
+    });
   }
 
   getDataTable() {
