@@ -16,8 +16,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     totalDeaths: 0,
     totalRecovered: 0,
   };
-  Date = '';
-  Country = '';
+  date = '';
   datatable = [];
   dataCountries: ICountries[];
   dataGlobal: IGlobal;
@@ -28,7 +27,16 @@ export class HomeComponent implements OnInit, OnDestroy {
     ColumnChart: 'ColumnChart',
     height: 400,
     dynamicResize: true,
+    options: {
+      hAxis: {
+        title: 'Country',
+      },
+      vAxis: {
+        title: 'Cases',
+      },
+    },
   };
+  columnLabels: string[] = ['Country', 'Cases'];
 
   constructor(private dataService: GlobalDataService) {}
 
@@ -51,8 +59,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.totalData.totalDeaths = global.TotalDeaths;
         this.totalData.totalRecovered = global.TotalRecovered;
         this.loading = false;
+
         countries.map((el) => {
-          this.Date = el.Date;
+          this.date = el.Date;
         });
         this.initChart();
       });
@@ -64,19 +73,13 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   initChart() {
     this.datatable = [];
-    let arr = this.dataCountries.filter((a) => {
+    const arr = this.dataCountries.filter((a) => {
       if (a.TotalConfirmed > 20000) {
         return a.TotalConfirmed;
       }
     });
     arr.forEach((cs) => {
-      let value: number;
-      value = cs.TotalConfirmed;
-      this.datatable.push([cs.Country, value]);
+      this.datatable.push([cs.Country, cs.TotalConfirmed]);
     });
-  }
-
-  getDataTable() {
-    return this.dataCountries.map((el) => [el.Country, el.TotalConfirmed]);
   }
 }

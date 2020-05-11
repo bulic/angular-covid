@@ -8,6 +8,6 @@ export interface ICountries {
   Confirmed: string;
   Deaths: number;
   Recovered: number;
-  Latitude: string;
-  Longitude: string;
+  Lat: string;
+  Lon: string;
 }

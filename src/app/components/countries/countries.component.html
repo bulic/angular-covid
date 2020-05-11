@@ -15,8 +15,6 @@
                         </option>
                     </select>
                 </div>
-                <div>
-                </div>
             </div>
             <div class="col-12" *ngIf="dataForCountry && dataForCountry.length">
                 <app-card [TotalConfirmed]='totalData.totalConfirmed' [TotalRecovered]='totalData.totalRecovered'
@@ -27,9 +25,9 @@
     </div>
     <div class="row row-eq-height">
         <div class="col-lg-8 col-md-12" *ngIf="dataForCountry && dataForCountry.length">
-            <h3 class="text-uppercase font-weight-bold text-center">data for {{Country}} day by day</h3>
+            <h3 class="text-uppercase font-weight-bold text-center">data for {{country}} day by day</h3>
             <google-chart [type]="chart.LineChart" [data]='datatable' style="width: 100%;" [height]='chart.height'
-                [dynamicResize]="chart.dynamicResize">
+                [dynamicResize]="chart.dynamicResize" [columns]="columnLabels" [options]='chart.options'>
             </google-chart>
         </div>
         <div class="col-12" *ngIf="dataForCountry && !dataForCountry.length">

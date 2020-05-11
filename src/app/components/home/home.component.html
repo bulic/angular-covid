@@ -11,7 +11,7 @@
         <div>
             <div class="text-white pb-5 pt-4 text-center">
                 <h2 class="text-center text-uppercase font-weight-bold">Last date of global
-                    data <span>{{Date | date:'fullDate'}}</span></h2>
+                    data <span>{{date | date:'fullDate'}}</span></h2>
             </div>
         </div>
     </div>
@@ -49,7 +49,7 @@
     <div class="row pt-4 pb-4 rounded-lg mx-auto">
         <div class="col-lg-6 col-md-12 col-12">
             <google-chart [type]="chart.ColumnChart" [data]='datatable' style="width: 100%;" [height]='chart.height'
-                [dynamicResize]="chart.dynamicResize">
+                [dynamicResize]="chart.dynamicResize" [columns]="columnLabels" [options]='chart.options'>
             </google-chart>
         </div>
         <div class="col-lg-6 col-md-12 col-12">

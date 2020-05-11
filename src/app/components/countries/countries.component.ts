@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class CountriesComponent implements OnInit {
   loading: boolean = false;
-  Country = '';
+  country = '';
   totalData = {
     totalConfirmed: 0,
     totalDeaths: 0,
@@ -30,7 +30,16 @@ export class CountriesComponent implements OnInit {
     LineChart: 'LineChart',
     height: 400,
     dynamicResize: true,
+    options: {
+      hAxis: {
+        title: 'Date',
+      },
+      vAxis: {
+        title: 'Cases',
+      },
+    },
   };
+  columnLabels: string[] = ['Date', 'Cases'];
 
   constructor(private dataService: GlobalDataService) {}
 
@@ -42,14 +51,13 @@ export class CountriesComponent implements OnInit {
         this.dataCountries = countries;
         this.loading = false;
 
-        this.dataCountries.forEach((el) => this.countries.push(el.Country));
-        this.dataCountries.forEach((el) => {
-          if (el.Country == this.defaultCountry) {
-            this.totalData.totalConfirmed = el.TotalConfirmed;
-            this.totalData.totalDeaths = el.TotalDeaths;
-            this.totalData.totalRecovered = el.TotalRecovered;
-          }
-        });
+        this.dataCountries
+          .filter((el) => el.Country == this.defaultCountry)
+          .map((opt) => {
+            this.totalData.totalConfirmed = opt.TotalConfirmed;
+            this.totalData.totalDeaths = opt.TotalDeaths;
+            this.totalData.totalRecovered = opt.TotalRecovered;
+          });
       });
     this.dataCountry(this.defaultCountry);
   }
@@ -75,15 +83,14 @@ export class CountriesComponent implements OnInit {
       this.dataService.fetchDataCountry(data).subscribe((data) => {
         this.dataForCountry = data;
         if (data.length) {
-          this.Country = this.dataForCountry[0].Country;
+          this.country = this.dataForCountry[0].Country;
           this.initChart();
           let lastElemant = this.dataForCountry[this.dataForCountry.length - 1];
           this.totalData.totalConfirmed = +lastElemant.Confirmed;
           this.totalData.totalDeaths = +lastElemant.Deaths;
           this.totalData.totalRecovered = +lastElemant.Recovered;
-          this.lat = +this.dataForCountry[0].Latitude;
-          this.lon = +this.dataForCountry[0].Longitude;
-          console.log(this.lat);
+          this.lat = +this.dataForCountry[0].Lat;
+          this.lon = +this.dataForCountry[0].Lon;
           this.serviceSub$.push(
             this.dataService.fetchWeatherData(this.lat, this.lon).subscribe(
               (data) =>
@@ -105,10 +112,8 @@ export class CountriesComponent implements OnInit {
 
   initChart() {
     this.datatable = [];
-    this.dataForCountry.forEach((el) => {
-      let value;
-      value = el.Date;
-      this.datatable.push([value, +el.Confirmed]);
+    this.dataForCountry.map((el) => {
+      this.datatable.push([el.Date, +el.Confirmed]);
     });
   }
 }

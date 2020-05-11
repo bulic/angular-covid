@@ -17,37 +17,25 @@
     </div>
     <div class="row mb-4">
         <div class="col-md-12 col-lg-6 mt-3">
+            <h3 class="text-center mb-4 pt-5 text-uppercase font-weight-bold">Symptoms</h3>
             <div class="row">
-                <h3 class="col-12 text-center mb-4 pt-5 text-uppercase font-weight-bold">Symptoms</h3>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="row">
-                        <div class="col-12 col-md-6 col-lg-4 pb-2 pt-2 text-center mb-5 mt-2"
-                             *ngFor="let item of symptoms">
-                             <div class="bg-light rounded border border-secondary p-2">
-                                <img src={{item.image}}>
-                                <h6 class="card-text">{{item.name}}</h6>
-                            </div>
-                        </div>
+                <div class="col-12 col-md-6 col-lg-4 pb-2 pt-2 text-center mb-5 mt-2"  *ngFor="let item of symptoms">
+                     <div class="bg-light rounded border border-secondary p-2">
+                        <img src={{item.image}}>
+                        <h6 class="card-text">{{item.name}}</h6>
                     </div>
                 </div>
             </div>
-            <div class="col-12">
-                <div class="row mt-1 p-4 rounded border border-dark bg-light">
-                    <div
-                        class="col-12 text-center d-flex justify-content-center text-danger text-uppercase font-weight-bold">
-                        <h3 class="font-weight-bold">If you feel sick have some of these sympthoms call your doctor and
-                            stay home</h3>
-                    </div>
-                </div>
-            </div>
+            <h3
+                class="mt-4 p-4 rounded border border-dark bg-light font-weight-bold text-center d-flex justify-content-center text-danger text-uppercase font-weight-bold">
+                If you feel sick have some of these sympthoms call your doctor and
+                stay home</h3>
         </div>
         <div class="col-md-12 col-lg-6 mt-3">
             <div class="bg-light rounded border-bottom-0 border border-dark">
                 <h3 class="text-center mb-4 pt-5 text-uppercase font-weight-bold">Video about
                     Covid-19</h3>
-                <div class="pt-2">
+                <div class="pt-4">
                     <div class="text-center mb-3">
                         <app-video></app-video>
                     </div>
@@ -56,10 +44,10 @@
         </div>
     </div>
     <div class="row">
-        <h4 class="col-12 text-center mb-4 text-uppercase font-weight-bold">Prevention</h4>
         <div class="col-12">
+            <h4 class="text-center mb-4 text-uppercase font-weight-bold">Prevention</h4>
             <div class="row">
-                <div class="col-12 col-md-6 col-lg-3 text-center mb-5 mt-2" *ngFor="let item of preventions">
+                <div class="col-md-6 col-lg-3 text-center mb-5 mt-2" *ngFor="let item of preventions">
                      <div class="bg-light rounded border border-secondary p-2">
                         <img src={{item.image}}>
                           <h6 class="card-text">{{item.name}}</h6>
