@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center mt-4 mb-4" *ngIf="loading">
+    <div class="spinner-grow text-danger" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="bg-danger rounded">
+                <div class="form-group col-lg-5 mx-auto pb-5 font-weight-bold text-center pt-5">
+                    <label class="text-uppercase" for="country">Select Country</label>
+                    <select class="form-control" id="country" #input (change)="onChange(input.value)">
+                        <option [selected]="item.Country === defaultCountry" value="{{item.Slug}}"
+                            *ngFor="let item of dataCountries">{{item.Country}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-12" *ngIf="dataForCountry && dataForCountry.length">
+                <app-card [TotalConfirmed]='totalData.totalConfirmed' [TotalRecovered]='totalData.totalRecovered'
+                    [TotalDeaths]='totalData.totalDeaths'>
+                </app-card>
+            </div>
+        </div>
+    </div>
+    <div class="row row-eq-height">
+        <div class="col-lg-8 col-md-12" *ngIf="dataForCountry && dataForCountry.length">
+            <h3 class="text-uppercase font-weight-bold text-center">data for {{country}} day by day</h3>
+            <google-chart [type]="chart.LineChart" [data]='datatable' style="width: 100%;" [height]='chart.height'
+                [dynamicResize]="chart.dynamicResize" [columns]="columnLabels" [options]='chart.options'>
+            </google-chart>
+        </div>
+        <div class="col-12" *ngIf="dataForCountry && !dataForCountry.length">
+            <div class="text-uppercase font-weight-bold border border-dark rounded pt-5 pb-5 text-center alert alert-danger"
+                role="alert">
+                <h1>no data for this country</h1>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12 text-center font-weight-bold" *ngIf="dataForCountry && dataForCountry.length">
+            <div class="fw-place-within-col text-uppercase font-weight-bold bg-light border border-dark rounded pt-2 pb-2 mb-3"
+                [ngStyle]="weatherData.temp>23? {'color': 'green'} : {'color': 'red'}">
+                <h1>{{weatherData.name}}</h1>
+                <h1>{{weatherData.temp}}<sup>&#x2103;</sup></h1>
+            </div>
+            <div class="map d-flex border border-dark rounded">
+                <agm-map class="w-100 h-100" [latitude]="lat" [longitude]="lon">
+                    <agm-marker [latitude]="lat" [longitude]="lon"></agm-marker>
+                </agm-map>
+            </div>
+        </div>
+    </div>
+</div>
